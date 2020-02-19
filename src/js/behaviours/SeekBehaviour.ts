@@ -16,13 +16,9 @@ export class SeekBehaviour extends SteeringBehaviour {
         }
 
         let desiredVelocity: Vector2D = this.target.position.clone();
-        // console.log(desiredVelocity);
         desiredVelocity.sub(movingEntity.position);
-        // console.log(desiredVelocity);
-        // console.log(this.target.position);
         desiredVelocity.normalise();
         desiredVelocity.multiply(movingEntity.maxSpeed);
-        // console.log(desiredVelocity);
         return desiredVelocity.sub(movingEntity.velocity);
     }
 }

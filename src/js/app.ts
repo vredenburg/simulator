@@ -1,13 +1,13 @@
 declare var require: any;
 require('../css/main.css');
 
-import { World } from './world/World';
+import { Game } from './Game';
 
 class App {
-	private _world: World;
+	private _game: Game;
 
-	constructor(world: World) {
-		this._world = world;
+	constructor(game: Game) {
+		this._game = game;
 	}
 
 	public setup(): void {
@@ -20,13 +20,13 @@ class App {
         // need to bind the current this reference to the callback
 		requestAnimationFrame(this.gameLoop.bind(this)); 
 
-        this._world.update(0.5);
-		this._world.render();
+        this._game.update(0.9);
+		this._game.render();
 	}
 }
 
 window.onload = () => {
-	let app = new App(new World(500, 500));
+	let app = new App(new Game(800, 500));
 
 	app.setup();
 }
