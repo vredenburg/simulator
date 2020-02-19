@@ -10,15 +10,17 @@ export class SeekBehaviour extends SteeringBehaviour {
         super();
         this.target = target;
     }
+    
     public act(movingEntity: MovingEntity): Vector2D {
         if(this.target.position == null) {
             return new Vector2D(0,0);
         }
 
-        let desiredVelocity: Vector2D = this.target.position.clone();
-        desiredVelocity.sub(movingEntity.position);
-        desiredVelocity.normalise();
-        desiredVelocity.multiply(movingEntity.maxSpeed);
-        return desiredVelocity.sub(movingEntity.velocity);
+        return this.target.position
+            .clone()
+            .sub(movingEntity.position)
+            .normalise()
+            .multiply(movingEntity.maxSpeed)
+            .sub(movingEntity.velocity);
     }
 }

@@ -38,7 +38,7 @@ export class World {
         this.movingEntities.push(new MovingEntity(new Vector2D(300,400)));
 
         this.target = new MovingEntity(new Vector2D(50,300));
-        this.setBehaviour(Behaviour.SEEK);
+        this.setBehaviour(Behaviour.FLEE);
     }
 
     public setBehaviour(behaviourType: number) {

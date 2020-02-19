@@ -16,8 +16,6 @@ export class Vector2D {
     }
 
     public sub(v: Vector2D): Vector2D {
-        // console.log(this.x);
-        // console.log(v.x);
         this.x -= v.x;
         this.y -= v.y;
         
@@ -34,16 +32,24 @@ export class Vector2D {
         return this.multiply(1.0 / value);
     }
 
-    public length(): number {
-        return Math.sqrt(this.lengthSquared())
+    // public length(): number {
+    //     return Math.sqrt(this.lengthSquared())
+    // }
+
+    // public lengthSquared(): number {
+    //     return this.x * this.x + this.y * this.y;
+    // }
+
+    public distance(): number {
+        return Math.sqrt(this.distanceSquared())
     }
 
-    public lengthSquared(): number {
+    public distanceSquared(): number {
         return this.x * this.x + this.y * this.y;
     }
 
     public normalise(): Vector2D {
-        let length: number = this.length();
+        let length: number = this.distance();
         if(length != 0) {
             this.x /= length;
             this.y /= length;
@@ -52,7 +58,7 @@ export class Vector2D {
     }
 
     public truncate(max: number): Vector2D {
-        if(this.length() > max) {
+        if(this.distance() > max) {
             this.normalise();
             this.multiply(max);
         }

@@ -15,14 +15,16 @@ export class FleeBehaviour extends SteeringBehaviour {
     public act(movingEntity: MovingEntity): Vector2D {
         // console.log(this.panicDistance);
         // console.log(movingEntity.position.lengthSquared());
-        if(movingEntity.position.lengthSquared() > this.panicDistance) {
+        let desiredVelocity: Vector2D = movingEntity.position.clone();
+        desiredVelocity.sub(this.threat.position);
+
+        if(desiredVelocity.distanceSquared() > this.panicDistance) {
             return new Vector2D(0,0);
         }
 
-        let desiredVelocity: Vector2D = movingEntity.position.clone();
-        desiredVelocity.sub(this.threat.position);
-        desiredVelocity.normalise();
-        desiredVelocity.multiply(movingEntity.maxSpeed);
+        desiredVelocity
+            .normalise()
+            .multiply(movingEntity.maxSpeed);
         return desiredVelocity.sub(movingEntity.velocity);
     }
 }

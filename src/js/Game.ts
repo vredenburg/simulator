@@ -16,7 +16,8 @@ export class Game {
     }
 
     public update(delta: number): void {
-        this.world.movingEntities.forEach(e => e.update(delta));
+        this.world.movingEntities.forEach(e => e.update(delta).wrapAround(this.world.width, this.world.height));
+        //.wrapAround(this.world.width, this.world.height)
     }
 
     public render(): void {
