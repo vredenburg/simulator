@@ -9,7 +9,7 @@ export abstract class Entity {
     constructor(xPos: number, yPos: number) {
         this.position = new Vector2D(xPos, yPos);
         this.presence = 10 * 10;
-        this.perceptionRadius = 50 * 50;
+        this.perceptionRadius = 100 * 100;
     }
 
     public abstract update(delta: number, otherEntities: Entity[]): void;

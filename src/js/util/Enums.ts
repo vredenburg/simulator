@@ -14,5 +14,8 @@ export enum BehaviourType {
     SEEK = 0,
     FLEE = 1,
     ARRIVE = 2,
-    FLOCK = 3
+    FLOCK = 3,
+    SEPERATION = 4,
+    ALIGNMENT = 5,
+    COHESION = 6
 }

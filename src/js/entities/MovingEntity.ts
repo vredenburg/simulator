@@ -10,7 +10,7 @@ export class MovingEntity extends Entity {
     public mass: number;
     public minSpeed: number;
     public maxSpeed: number;
-    public steeringBehaviour: SteeringBehaviour;
+    public steeringBehaviour: Array<SteeringBehaviour>;
     public deceleration?: Deceleration;
 
     constructor(xPos: number, yPos: number) {
@@ -20,11 +20,17 @@ export class MovingEntity extends Entity {
         this.maxSpeed = 5;
         this.deceleration = Deceleration.NORMAL;
         this.velocity = new Vector2D(Math.random()*10, Math.random()*10);
+        this.steeringBehaviour = new Array<SteeringBehaviour>();
     }
 
     public update(delta: number, otherEntities: Entity[]): MovingEntity {
-        let steeringForce: Vector2D = this.steeringBehaviour.act(this, otherEntities);
-        // console.log(steeringForce);
+        let steeringForce: Vector2D = new Vector2D();
+        // this.steeringBehaviour.forEach(function (e)  {
+        //     if(this.steeringBehaviour.weigth > 0) {
+        //         steeringForce.add(e.act(this, otherEntities))
+        //     }
+        // });
+        this.steeringBehaviour.forEach(e => steeringForce.add(e.act(this, otherEntities)));
         let acceleration: Vector2D = steeringForce.divide(this.mass);
 
         this.velocity
