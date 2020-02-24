@@ -1,8 +1,4 @@
 import { Vector2D } from "./util/Vector2D";
-import { Entity } from "./entities/Entity";
-import { MovingEntity } from "./entities/MovingEntity";
-import { Behaviour } from "./behaviours/Behaviour";
-import { FleeBehaviour } from "./behaviours/FleeBehaviour";
 import { World } from "./world/World";
 
 export class Game {
@@ -16,8 +12,11 @@ export class Game {
     }
 
     public update(delta: number): void {
-        this.world.movingEntities.forEach(e => e.update(delta).wrapAround(this.world.width, this.world.height));
-        //.wrapAround(this.world.width, this.world.height)
+        this.world.movingEntities.forEach(e => 
+            e
+            .update(delta, this.world.movingEntities)
+            .wrapAround(this.world.width, this.world.height)
+        );
     }
 
     public render(): void {
@@ -27,7 +26,6 @@ export class Game {
     }
 
     public clickEvent = (e: MouseEvent): void => {
-        console.log(e.clientX);
         this.world.target.position = new Vector2D(e.clientX, e.clientY);   
     }
 }

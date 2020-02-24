@@ -3,27 +3,33 @@ import { Entity } from "./Entity";
 import { Graphics } from "../util/Graphics";
 import { SteeringBehaviour } from "../behaviours/SteeringBehaviour";
 import { wtf } from "../util/WhyCantJSDoThisProperly";
+import { Deceleration } from "../util/Enums";
 
 export class MovingEntity extends Entity {
     public velocity: Vector2D;
     public mass: number;
+    public minSpeed: number;
     public maxSpeed: number;
     public steeringBehaviour: SteeringBehaviour;
+    public deceleration?: Deceleration;
 
-    constructor(position: Vector2D) {
-        super(position);
+    constructor(xPos: number, yPos: number) {
+        super(xPos, yPos);
         this.mass = 60;
-        this.maxSpeed  = 150;
-        this.velocity = new Vector2D();
+        this.minSpeed = 2;
+        this.maxSpeed = 5;
+        this.deceleration = Deceleration.NORMAL;
+        this.velocity = new Vector2D(Math.random()*10, Math.random()*10);
     }
 
-    public update(delta: number): MovingEntity {
-        let steeringForce: Vector2D = this.steeringBehaviour.act(this);
+    public update(delta: number, otherEntities: Entity[]): MovingEntity {
+        let steeringForce: Vector2D = this.steeringBehaviour.act(this, otherEntities);
+        // console.log(steeringForce);
         let acceleration: Vector2D = steeringForce.divide(this.mass);
 
         this.velocity
             .add(acceleration.multiply(delta))
-            .truncate(this.maxSpeed);
+            .truncate(this.minSpeed,this.maxSpeed);
 
         this.position.add(this.velocity.multiply(delta));
         return this;
@@ -34,6 +40,7 @@ export class MovingEntity extends Entity {
     }
 
     public wrapAround = (width: number, height: number): void => {
+        // a custom modulo function is used here because apparantly JS' implementation of % can't deal with negative numbers
         this.position = new Vector2D(wtf.mod(this.position.x,  width), wtf.mod(this.position.y, height));
     }
 }

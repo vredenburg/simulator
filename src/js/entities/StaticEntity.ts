@@ -5,8 +5,8 @@ export class StaticEntity extends Entity {
     public scale: number;
 
     // Initialises Vector2D with default values of 0,0 if no parameters are passed.
-    constructor(position: Vector2D) {
-        super(position);
+    constructor(xPos: number, yPos: number) {
+        super(xPos, yPos);
     }
 
     public update(delta: number): void {

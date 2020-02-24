@@ -20,7 +20,7 @@ class App {
         // need to bind the current this reference to the callback
 		requestAnimationFrame(this.gameLoop.bind(this)); 
 
-        this._game.update(0.9);
+        this._game.update(0.8);
 		this._game.render();
 	}
 }
