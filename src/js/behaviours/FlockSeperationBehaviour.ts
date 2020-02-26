@@ -1,16 +1,10 @@
 import { SteeringBehaviour } from "./SteeringBehaviour";
 import { Vector2D } from "../util/Vector2D";
 import { MovingEntity } from "../entities/MovingEntity";
-import { Entity } from "../entities/Entity";
 
 export class FlockSeperationBehaviour extends SteeringBehaviour {
-
     private total: number = 0;
-
-    constructor() {
-        super();
-    }
-
+    
     // experimental
     private findNearbyEntities(thisEntity: MovingEntity, otherEntities: MovingEntity[]): MovingEntity[] {
         let nearbyEntities: Array<MovingEntity> = new Array<MovingEntity>();
@@ -54,18 +48,10 @@ export class FlockSeperationBehaviour extends SteeringBehaviour {
     }  
     
     public act(thisEntity: MovingEntity, otherEntities: MovingEntity[]): Vector2D {
-        // let nearbyEntities: Array<MovingEntity> = this.findNearbyEntities(thisEntity,otherEntities);
         let avg: Vector2D = new Vector2D(0,0);
-        // console.log(avg);
-        // if(this.total > 0) {
-        //     avg = this.align(thisEntity, nearbyEntities, avg);
-        // }
-        
         avg.add(this.seperate(thisEntity, otherEntities, avg));
-        // avg.sub(thisEntity.velocity);
-        
         this.total = 0;
-        // console.log(avg);    
-        return avg;
+ 
+        return avg.multiply(this.weight);
     }
 }
