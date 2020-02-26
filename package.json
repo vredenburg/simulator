@@ -21,8 +21,6 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
-    "inversify": "^5.0.1",
-    "reflect-metadata": "^0.1.13",
     "typescript": "^3.7.5"
   }
 }

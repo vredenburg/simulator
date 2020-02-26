@@ -5,14 +5,16 @@ export abstract class Entity {
     public scale: number;
     public presence: number;
     public perceptionRadius: number;
+    public panicDistance: number;
 
     constructor(xPos: number, yPos: number) {
         this.position = new Vector2D(xPos, yPos);
-        this.presence = 10 * 10;
-        this.perceptionRadius = 100 * 100;
+        this.presence = 15 * 15;
+        this.perceptionRadius = 200 * 200;
+        this.panicDistance = 100 * 100;
     }
 
-    public abstract update(delta: number, otherEntities: Entity[]): void;
+    // public abstract update(delta: number, otherEntities: Entity[]): void;
 
     public abstract render(ctx: CanvasRenderingContext2D): void;
 }

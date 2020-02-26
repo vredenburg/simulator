@@ -1,22 +1,15 @@
-import { SteeringBehaviour } from "./SteeringBehaviour";
 import { Vector2D } from "../util/Vector2D";
-import { Entity } from "../entities/Entity";
 import { MovingEntity } from "../entities/MovingEntity";
+import { TargetedBehaviour } from "./TargetedBehaviour";
 
-export class SeekBehaviour extends SteeringBehaviour {
-    public target: Entity;
-
-    constructor(target: Entity) {
-        super();
-        this.target = target;
-    }
+export class SeekBehaviour extends TargetedBehaviour {
     
-    public act(movingEntity: MovingEntity): Vector2D {
-        if(this.target.position == null) {
+    public act(movingEntity: MovingEntity, target: MovingEntity): Vector2D {
+        if(target.position == null) {
             return new Vector2D(0,0);
         }
 
-        return this.target.position
+        return target.position
             .clone()
             .sub(movingEntity.position)
             .normalise()

@@ -20,13 +20,13 @@ class App {
         // need to bind the current this reference to the callback
 		requestAnimationFrame(this.gameLoop.bind(this)); 
 
-        this._game.update(0.8);
+        this._game.update(1);
 		this._game.render();
 	}
 }
 
 window.onload = () => {
-	let app = new App(new Game(800, 500));
+	let app = new App(new Game());
 
 	app.setup();
 }

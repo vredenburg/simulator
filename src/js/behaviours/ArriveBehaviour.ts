@@ -1,18 +1,11 @@
-import { SteeringBehaviour } from "./SteeringBehaviour";
+import { TargetedBehaviour } from "./TargetedBehaviour";
 import { Vector2D } from "../util/Vector2D";
-import { Entity } from "../entities/Entity";
 import { MovingEntity } from "../entities/MovingEntity";
 
-export class ArriveBehaviour extends SteeringBehaviour {
-    public target: Entity;
+export class ArriveBehaviour extends TargetedBehaviour {
 
-    constructor(target: Entity) {
-        super();
-        this.target = target;
-    }
-    
-    public act(movingEntity: MovingEntity): Vector2D {
-        let toTarget: Vector2D = this.target.position
+    public act(movingEntity: MovingEntity, target: MovingEntity): Vector2D {
+        let toTarget: Vector2D = target.position
             .clone()
             .sub(movingEntity.position);
 

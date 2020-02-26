@@ -1,49 +1,30 @@
 import { Vector2D } from "./util/Vector2D";
 import { World } from "./world/World";
+import { MovingEntityController } from "./controllers/MovingEntityController"
 
 export class Game {
-    private world: World;
-    private seperationSlider: HTMLInputElement;
-    private alignmentSlider: HTMLInputElement;
-    private cohesionSlider: HTMLInputElement;
+    private _world: World;
+    private _movingEntityController: MovingEntityController;
 
-    constructor(width: number, heigth: number) {
-        this.world = new World(width, heigth);
-        this.world.canvas.addEventListener('click', this.clickEvent, false);
-
-        this.alignmentSlider = <HTMLInputElement> document.getElementById("alignmentWeight");
-        this.alignmentSlider.oninput = this.alignmentChanged;
-        this.seperationSlider = <HTMLInputElement> document.getElementById("seperationWeight");
-        this.seperationSlider.oninput = this.seperationChanged;
-        this.cohesionSlider = <HTMLInputElement> document.getElementById("cohesionWeight");
-        this.cohesionSlider.oninput = this.cohesionChanged;
+    constructor() {
+        this._movingEntityController = new MovingEntityController();
+        this._world = World.Instance;
+        this._world.canvas.addEventListener('click', this.clickEvent, false);
     }
 
     public update(delta: number): void {
-        this.world.movingEntities.forEach(e => 
-            e
-            .update(delta, this.world.movingEntities)
-            .wrapAround(this.world.width, this.world.height)
+        this._world.movingEntities.forEach(e => 
+            e.position = this._movingEntityController.update(e, this._world.movingEntities)
         );
     }
 
     public render(): void {
-        this.world.ctx.clearRect(0, 0, this.world.width, this.world.height);
-        this.world.movingEntities.forEach(e => e.render(this.world.ctx));
-        this.world.target.render(this.world.ctx);
+        this._world.ctx.clearRect(0, 0, this._world.canvas.width, this._world.canvas.height);
+        this._world.movingEntities.forEach(e => e.render(this._world.ctx));
+        this._world.target.render(this._world.ctx);
     }
 
     public clickEvent = (e: MouseEvent): void => {
-        this.world.target.position = new Vector2D(e.clientX, e.clientY);   
-    }
-
-    public seperationChanged = (e: Event): void => {
-        console.log(this.seperationSlider.value);
-    }
-    public alignmentChanged = (e: Event): void => {
-        console.log(this.alignmentSlider.value);
-    }
-    public cohesionChanged = (e: Event): void => {
-        console.log(this.cohesionSlider.value);
+        this._world.target.position = new Vector2D(e.clientX, e.clientY);   
     }
 }

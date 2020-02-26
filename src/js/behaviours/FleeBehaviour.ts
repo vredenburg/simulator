@@ -2,23 +2,15 @@ import { SteeringBehaviour } from "./SteeringBehaviour";
 import { Vector2D } from "../util/Vector2D";
 import { Entity } from "../entities/Entity";
 import { MovingEntity } from "../entities/MovingEntity";
+import { TargetedBehaviour } from "./TargetedBehaviour";
 
-export class FleeBehaviour extends SteeringBehaviour {
-    public threat: Entity;
-    private panicDistance: number;
+export class FleeBehaviour extends TargetedBehaviour {
 
-    constructor(threat: Entity, panicDistance: number = 100 * 100) {
-        super();
-        this.threat = threat;
-        this.panicDistance = panicDistance;
-    }
-    public act(movingEntity: MovingEntity): Vector2D {
-        // console.log(this.panicDistance);
-        // console.log(movingEntity.position.lengthSquared());
+    public act(movingEntity: MovingEntity, threat: MovingEntity): Vector2D {
         let desiredVelocity: Vector2D = movingEntity.position.clone();
-        desiredVelocity.sub(this.threat.position);
+        desiredVelocity.sub(threat.position);
 
-        if(desiredVelocity.distanceSquared() > this.panicDistance) {
+        if(desiredVelocity.distanceSquared() > movingEntity.panicDistance || this.target == null) {
             return new Vector2D(0,0);
         }
 
