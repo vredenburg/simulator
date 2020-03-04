@@ -2,7 +2,10 @@ import { SteeringBehaviour } from "./SteeringBehaviour";
 import { Vector2D } from "../util/Vector2D";
 import { MovingEntity } from "../entities/MovingEntity";
 import { BehaviourType } from "../util/Enums";
-import {SeekBehaviour, FleeBehaviour, ArriveBehaviour, FlockBehaviour, FlockAlignmentBehaviour, FlockCohesionBehaviour, FlockSeperationBehaviour} from "./";
+import { SeekBehaviour, PursuitBehaviour, FleeBehaviour, ArriveBehaviour, 
+        FlockBehaviour, FlockAlignmentBehaviour, FlockCohesionBehaviour, 
+        FlockSeperationBehaviour
+    } from "./";
 import { TargetedBehaviour } from "./TargetedBehaviour";
 import { World } from "../world/World";
 
@@ -18,16 +21,17 @@ export class BehaviourService {
         this.behaviours[BehaviourType.SEPERATION] = new FlockSeperationBehaviour;
 
         this.behaviours[BehaviourType.SEEK] = new SeekBehaviour;
+        this.behaviours[BehaviourType.PURSUIT] = new PursuitBehaviour;
         this.behaviours[BehaviourType.FLEE] = new FleeBehaviour;
         this.behaviours[BehaviourType.ARRIVE] = new ArriveBehaviour;
 
-        this.behaviours[BehaviourType.FLOCK].isActive = true;
-        // this.behaviours[BehaviourType.FLEE].isActive = true;
-        // this.behaviours[BehaviourType.ARRIVE].isActive = true;
+        // this.behaviours[BehaviourType.FLOCK].isActive = true;
+        this.behaviours[BehaviourType.PURSUIT].isActive = true;
+        this.behaviours[BehaviourType.FLEE].isActive = true;
 
-        // this.behaviours[BehaviourType.ALIGNMENT].isActive = true;
-        // this.behaviours[BehaviourType.COHESION].isActive = true;
-        // this.behaviours[BehaviourType.SEPERATION].isActive = true;
+        this.behaviours[BehaviourType.ALIGNMENT].isActive = true;
+        this.behaviours[BehaviourType.COHESION].isActive = true;
+        this.behaviours[BehaviourType.SEPERATION].isActive = true;
     }
 
     public toggleBehaviour(behaviour: BehaviourType) {
@@ -35,7 +39,8 @@ export class BehaviourService {
     }
 
     public setWeight(behaviour: BehaviourType, weight: number) {
-        this.behaviours[behaviour].weight = weight/100;
+        this.behaviours[behaviour].weight = weight/100.0;
+        console.log(this.behaviours[behaviour].weight);
     }
 
     public act(entity: MovingEntity, otherEntities: MovingEntity[]): Vector2D {

@@ -32,15 +32,35 @@ export class Vector2D {
         return this.multiply(1.0 / value);
     }
 
-    public distance(): number {
-        return Math.sqrt(this.distanceSquared())
+    public newSub(v: Vector2D): Vector2D {
+        return new Vector2D(this.x - v.x, this.y - v.y);
     }
 
-    public distanceSquared(): number {
+    public newMultiply(value: number): Vector2D {
+        return new Vector2D(this.x * value, this.y * value);
+    }
+
+    public dot(other: Vector2D): number {
+        return this.x * other.x + this.y * other.y;
+    }
+
+    public length(): number {
+        return Math.sqrt(this.lengthSquared())
+    }
+
+    public lengthSquared(): number {
         return this.x * this.x + this.y * this.y;
     }
 
-    public normalise(length: number = this.distance()): Vector2D {
+    public distance(other: Vector2D): number {
+        return Math.sqrt(this.distanceSquared(other))
+    }
+
+    public distanceSquared(other: Vector2D): number {
+        return this.x * other.x + this.y * other.y;
+    }
+
+    public normalise(length: number = this.length()): Vector2D {
         if(length != 0) {
             this.x /= length;
             this.y /= length;
@@ -49,7 +69,7 @@ export class Vector2D {
     }
 
     public truncate(min: number, max: number): Vector2D {
-        let distance: number = this.distance();
+        let distance: number = this.length();
         if(distance > max) {
             this.normalise(distance);
             this.multiply(max);

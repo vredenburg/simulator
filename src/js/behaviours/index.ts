@@ -7,3 +7,4 @@ export * from "./FlockSeperationBehaviour";
 export * from "./SeekBehaviour";
 export * from "./SteeringBehaviour";
 export * from "./BehaviourService";
+export * from "./PursuitBehaviour";

@@ -31,8 +31,13 @@ export class World {
         console.log("Populating world...");
         this.movingEntities = new Array<MovingEntity>();
         
-        for(let i = 0; i < 50; i++) {
-            this.movingEntities.push(new MovingEntity(wtf.random(this.canvas.width),wtf.random(this.canvas.height)));
+        for(let i = 0; i < 100; i++) {
+            this.movingEntities.push(new MovingEntity(
+                    wtf.random(this.canvas.width),
+                    wtf.random(this.canvas.height),
+                    5,
+                    5
+                ));
         }
         
         this.target = new PlayerEntity(300,300);

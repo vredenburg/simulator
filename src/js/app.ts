@@ -5,9 +5,11 @@ import { Game } from './Game';
 
 class App {
 	private _game: Game;
+	private _paused: boolean;
 
 	constructor(game: Game) {
 		this._game = game;
+		document.addEventListener('keydown',this.keyPressed);
 	}
 
 	public setup(): void {
@@ -20,8 +22,16 @@ class App {
         // need to bind the current this reference to the callback
 		requestAnimationFrame(this.gameLoop.bind(this)); 
 
-        this._game.update(1);
-		this._game.render();
+		if(!this._paused) {
+			this._game.update();
+			this._game.render();
+		}
+	}
+
+	private keyPressed = (e: KeyboardEvent) => {
+        if(e.key ==  "p") {
+			this._paused = !this._paused;
+		}
 	}
 }
 

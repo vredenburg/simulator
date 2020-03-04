@@ -2,6 +2,7 @@ import { SteeringBehaviour } from "./SteeringBehaviour";
 import { Vector2D } from "../util/Vector2D";
 import { MovingEntity } from "../entities/MovingEntity";
 
+// deprecated
 export class FlockBehaviour extends SteeringBehaviour {
     private total: number = 0;
 
@@ -13,7 +14,7 @@ export class FlockBehaviour extends SteeringBehaviour {
             let d: number = thisEntity.position
                 .clone()
                 .sub(other.position)
-                .distanceSquared();
+                .lengthSquared();
             
             
             if(thisEntity.position.isNot(other.position) && d < thisEntity.perceptionRadius) {
@@ -29,7 +30,7 @@ export class FlockBehaviour extends SteeringBehaviour {
             let d: number = thisEntity.position
                 .clone()
                 .sub(other.position)
-                .distanceSquared();
+                .lengthSquared();
             
             if(thisEntity.position.isNot(other.position) && d < thisEntity.perceptionRadius && d < thisEntity.presence) {
                 let diff: Vector2D = thisEntity.position
@@ -52,7 +53,7 @@ export class FlockBehaviour extends SteeringBehaviour {
             let d: number = thisEntity.position
                 .clone()
                 .sub(other.position)
-                .distanceSquared();
+                .lengthSquared();
             
             if(thisEntity.position.isNot(other.position) && d < thisEntity.perceptionRadius) {
                 avg.add(other.velocity);
@@ -70,7 +71,7 @@ export class FlockBehaviour extends SteeringBehaviour {
             let d: number = thisEntity.position
                 .clone()
                 .sub(other.position)
-                .distanceSquared();
+                .lengthSquared();
             
             if(thisEntity.position.isNot(other.position) && d < thisEntity.perceptionRadius) {
                 avg.add(other.position);

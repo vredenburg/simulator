@@ -7,6 +7,11 @@ html, body {
     padding: 0px;
 }
 
-canvas {
+#canvas-container {
+    margin: 0 auto;
     -webkit-tap-highlight-color: transparent;
+}
+
+form {
+    margin: 0 auto;
 }

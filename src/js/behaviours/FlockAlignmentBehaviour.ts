@@ -13,7 +13,7 @@ export class FlockAlignmentBehaviour extends SteeringBehaviour {
             let d: number = thisEntity.position
                 .clone()
                 .sub(other.position)
-                .distanceSquared();
+                .lengthSquared();
             
             
             if(thisEntity.position.isNot(other.position) && d < thisEntity.perceptionRadius) {
@@ -29,7 +29,7 @@ export class FlockAlignmentBehaviour extends SteeringBehaviour {
             let d: number = thisEntity.position
                 .clone()
                 .sub(other.position)
-                .distanceSquared();
+                .lengthSquared();
             
             if(thisEntity.position.isNot(other.position) && d < thisEntity.perceptionRadius) {
                 avg.add(other.velocity);

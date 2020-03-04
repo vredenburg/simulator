@@ -13,7 +13,7 @@ export class FlockCohesionBehaviour extends SteeringBehaviour {
             let d: number = thisEntity.position
                 .clone()
                 .sub(other.position)
-                .distanceSquared();
+                .lengthSquared();
             
             
             if(thisEntity.position.isNot(other.position) && d < thisEntity.perceptionRadius) {
@@ -29,17 +29,17 @@ export class FlockCohesionBehaviour extends SteeringBehaviour {
             let d: number = thisEntity.position
                 .clone()
                 .sub(other.position)
-                .distanceSquared();
+                .lengthSquared();
             
-            if(thisEntity.position.isNot(other.position) && d < thisEntity.perceptionRadius) {
+            if(thisEntity.position != other.position && d < thisEntity.perceptionRadius) {
                 avg.add(other.position);
                 this.total++;
             }
         }
         if(this.total > 0) {
             avg
-            .sub(thisEntity.position)
-            .divide(this.total);
+            .divide(this.total)
+            .sub(thisEntity.position);
         }
         return avg;
     }

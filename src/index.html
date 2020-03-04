@@ -5,8 +5,12 @@
 <meta name="title" content="TypeScript Game">
 <meta name="description" content="A simple TypeScript game.">
 
+<!-- <link rel="stylesheet" type="text/css" href="css/main.css"> -->
+
 <body>
-	<canvas id="canvas"></canvas>
+	<div id="canvas-container">
+		<canvas id="canvas"></canvas>
+	</div>
 	<form>
 		<div class="form-group">
 		  <label for="formControlRange">Seperation weight</label>
@@ -19,12 +23,12 @@
 		<div class="form-group">
 			<input type="checkbox" id="arrive" name="arrive" value="arrive">
 			<label for="arrive">Arrive</label>
-			<input type="checkbox" id="seek" name="seek" value="seek">
+			<input type="checkbox" id="pursuit" name="pursuit" value="pursuit">
 			<label for="seek">Seek</label>
 			<input type="checkbox" id="flee" name="flee" value="flee">
 			<label for="flee">Flee</label>
 
-			<input type="checkbox" id="alignmen" name="alignmen" value="alignmen">
+			<input type="checkbox" id="alignment" name="alignment" value="alignment">
 			<label for="alignmen">Alignment</label>
 			<input type="checkbox" id="cohesion" name="cohesion" value="cohesion">
 			<label for="cohesion">Cohesion</label>

@@ -10,12 +10,10 @@ export class MovingEntityController implements Controller {
     
     private _world: World;
     private _behaviourService: BehaviourService;
-
-    public movingEntities: Array<MovingEntity>;
-
     private seperationSlider: HTMLInputElement;
     private alignmentSlider: HTMLInputElement;
     private cohesionSlider: HTMLInputElement;
+    public movingEntities: Array<MovingEntity>;
 
     constructor() {
         this._world = World.Instance;
@@ -31,17 +29,16 @@ export class MovingEntityController implements Controller {
     
     public update(entity: MovingEntity, entities: MovingEntity[]): Vector2D {
 
-        let steeringForce: Vector2D = new Vector2D();
-
-        steeringForce = this._behaviourService.act(entity, entities);
+        let steeringForce: Vector2D = this._behaviourService.act(entity, entities);
         let acceleration: Vector2D = steeringForce.divide(entity.mass);
 
         entity.velocity
-        .add(acceleration.multiply(this._world.gameSpeed))
-        .truncate(entity.minSpeed, entity.maxSpeed)
-        .multiply((this._world.gameSpeed));
+            .add(acceleration.multiply(0.2))
+            .truncate(entity.minSpeed, entity.maxSpeed)
+            .multiply((this._world.gameSpeed));
 
         entity.position.add(entity.velocity);
+        entity.heading = entity.velocity.clone().normalise();
 
         return this.wrapAround(entity.position);
     }
@@ -56,16 +53,13 @@ export class MovingEntityController implements Controller {
     }
 
     public seperationChanged = (e: Event): void => {
-        console.log(this.seperationSlider.value);
         this._behaviourService.setWeight(BehaviourType.SEPERATION, +this.seperationSlider.value);
     }
     public alignmentChanged = (e: Event): void => {
-        console.log(this.alignmentSlider.value);
-        this._behaviourService.setWeight(BehaviourType.ALIGNMENT, +this.seperationSlider.value);
+        this._behaviourService.setWeight(BehaviourType.ALIGNMENT, +this.alignmentSlider.value);
     }
     public cohesionChanged = (e: Event): void => {
-        console.log(this.cohesionSlider.value);
-        this._behaviourService.setWeight(BehaviourType.COHESION, +this.seperationSlider.value);
+        this._behaviourService.setWeight(BehaviourType.COHESION, +this.cohesionSlider.value);
     }
 
     public toggleBehaviour = (e: Event): void => {

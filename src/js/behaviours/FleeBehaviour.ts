@@ -10,7 +10,7 @@ export class FleeBehaviour extends TargetedBehaviour {
         let desiredVelocity: Vector2D = movingEntity.position.clone();
         desiredVelocity.sub(threat.position);
 
-        if(desiredVelocity.distanceSquared() > movingEntity.panicDistance || this.target == null) {
+        if(desiredVelocity.lengthSquared() > movingEntity.panicDistance || this.target == null) {
             return new Vector2D(0,0);
         }
 

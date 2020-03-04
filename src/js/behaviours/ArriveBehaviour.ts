@@ -9,7 +9,7 @@ export class ArriveBehaviour extends TargetedBehaviour {
             .clone()
             .sub(movingEntity.position);
 
-        let dist = toTarget.distance();
+        let dist = toTarget.length();
         
         if(dist > 50) {
             const decelerationTweaker: number = 0.3;
