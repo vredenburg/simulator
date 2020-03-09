@@ -1,15 +1,26 @@
-import { Vector2D } from "../util/Vector2D";
 import { Entity } from "./Entity";
 import { Graphics } from "../util/Graphics";
+import { MovingEntity } from "./MovingEntity";
 
 export class StaticEntity extends Entity {
+    public width: number;
+    public height: number;
 
-    // Initialises Vector2D with default values of 0,0 if no parameters are passed.
+    /**
+     * Creates an instance of StaticEntity
+     * 
+     * @param {number} xPos Spawn location on the x-axis.
+     * @param {number} yPos Spawn location on the y-axis.
+     * @param {number} width StaticEntity width.
+     * @param {number} height StaticEntity height.
+     */
     constructor(xPos: number, yPos: number, width: number, height: number) {
-        super(xPos, yPos, width, height);
+        super(xPos, yPos);
+        this.width = width;
+        this.height = height;
     }
 
-    public update(delta: number): void {
+    public update(otherEntities: MovingEntity[]): void {
 
     }
 

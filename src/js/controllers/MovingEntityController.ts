@@ -1,68 +1,67 @@
-import { Controller } from "./Controller"
-import { Entity, MovingEntity } from "../entities";
-import { World } from "../world/World";
-import { BehaviourService } from "../behaviours";
-import { Vector2D } from "../util/Vector2D"
-import { wtf } from "../util/WhyCantJSDoThisProperly";
-import { BehaviourType } from "../util/Enums";
+// import { Controller } from "./Controller"
+// import { Entity, MovingEntity } from "../entities";
+// import { World } from "../world/World";
+// import { BehaviourService } from "../behaviours";
+// import { Vector2D } from "../util/Vector2D"
+// import { wtf } from "../util/WhyCantJSDoThisProperly";
+// import { BehaviourType } from "../util/Enums";
 
-export class MovingEntityController implements Controller {
+// export class MovingEntityController implements Controller {
     
-    private _world: World;
-    private _behaviourService: BehaviourService;
-    private seperationSlider: HTMLInputElement;
-    private alignmentSlider: HTMLInputElement;
-    private cohesionSlider: HTMLInputElement;
-    public movingEntities: Array<MovingEntity>;
+//     private _world: World;
+//     private _behaviourService: BehaviourService;
+//     private seperationSlider: HTMLInputElement;
+//     private alignmentSlider: HTMLInputElement;
+//     private cohesionSlider: HTMLInputElement;
+//     public movingEntities: Array<MovingEntity>;
 
-    constructor() {
-        this._world = World.Instance;
-        this._behaviourService = new BehaviourService();
+//     constructor() {
+//         this._world = World.Instance;
+//         this._behaviourService = new BehaviourService();
 
-        this.alignmentSlider = <HTMLInputElement> document.getElementById("alignmentWeight");
-        this.alignmentSlider.oninput = this.alignmentChanged;
-        this.seperationSlider = <HTMLInputElement> document.getElementById("seperationWeight");
-        this.seperationSlider.oninput = this.seperationChanged;
-        this.cohesionSlider = <HTMLInputElement> document.getElementById("cohesionWeight");
-        this.cohesionSlider.oninput = this.cohesionChanged;
-    }
+//         this.alignmentSlider = <HTMLInputElement> document.getElementById("alignmentWeight");
+//         this.alignmentSlider.oninput = this.alignmentChanged;
+//         this.seperationSlider = <HTMLInputElement> document.getElementById("seperationWeight");
+//         this.seperationSlider.oninput = this.seperationChanged;
+//         this.cohesionSlider = <HTMLInputElement> document.getElementById("cohesionWeight");
+//         this.cohesionSlider.oninput = this.cohesionChanged;
+//     }
     
-    public update(entity: MovingEntity, entities: MovingEntity[]): Vector2D {
+//     public update(entity: MovingEntity, entities: MovingEntity[]): Vector2D {
 
-        let steeringForce: Vector2D = this._behaviourService.act(entity, entities);
-        let acceleration: Vector2D = steeringForce.divide(entity.mass);
+//         let steeringForce: Vector2D = this._behaviourService.act(entity, entities);
+//         let acceleration: Vector2D = steeringForce.divide(entity.mass);
 
-        entity.velocity
-            .add(acceleration.multiply(0.2))
-            .truncate(entity.minSpeed, entity.maxSpeed)
-            .multiply((this._world.gameSpeed));
+//         entity.velocity
+//             .add(acceleration)
+//             .normalise();
 
-        entity.position.add(entity.velocity);
-        entity.heading = entity.velocity.clone().normalise();
+//         entity.position.add(entity.velocity);
+//         entity.heading = entity.velocity.clone().normalise();
 
-        return this.wrapAround(entity.position);
-    }
+//         return this.wrapAround(entity.position);
+//     }
 
-    public render(entity: Entity, otherEntities: Entity[]): void {
+//     public render(entity: Entity, otherEntities: Entity[]): void {
 
-    }
+//     }
 
-    public wrapAround(entityPosition: Vector2D): Vector2D {
-        // a custom modulo function is used here because apparantly JS' implementation of % can't deal with negative numbers
-        return new Vector2D(wtf.mod(entityPosition.x,  this._world.canvas.width), wtf.mod(entityPosition.y, this._world.canvas.height));
-    }
+//     public wrapAround(entityPosition: Vector2D): Vector2D {
+//         // a custom modulo function is used here because apparantly JS' implementation of % can't deal with negative numbers
+//         return new Vector2D(wtf.mod(entityPosition.x,  this._world.canvas.width), wtf.mod(entityPosition.y, this._world.canvas.height));
+//     }
 
-    public seperationChanged = (e: Event): void => {
-        this._behaviourService.setWeight(BehaviourType.SEPERATION, +this.seperationSlider.value);
-    }
-    public alignmentChanged = (e: Event): void => {
-        this._behaviourService.setWeight(BehaviourType.ALIGNMENT, +this.alignmentSlider.value);
-    }
-    public cohesionChanged = (e: Event): void => {
-        this._behaviourService.setWeight(BehaviourType.COHESION, +this.cohesionSlider.value);
-    }
+//     public seperationChanged = (e: Event): void => {
+//         this._behaviourService.setWeight(BehaviourType.SEPERATION, +this.seperationSlider.value);
+//     }
+//     public alignmentChanged = (e: Event): void => {
+//         this._behaviourService.setWeight(BehaviourType.ALIGNMENT, +this.alignmentSlider.value);
+//     }
+//     public cohesionChanged = (e: Event): void => {
+//         this._behaviourService.setWeight(BehaviourType.COHESION, +this.cohesionSlider.value);
+//     }
 
-    public toggleBehaviour = (e: Event): void => {
+//     public toggleBehaviour = (e: Event): void => {
         
-    }
-}
+//     }
+// }

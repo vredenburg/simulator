@@ -1,33 +1,39 @@
 import { Vector2D } from "./util/Vector2D";
 import { World } from "./world/World";
-import { MovingEntityController } from "./controllers/MovingEntityController"
-import { PlayerController } from "./controllers/PlayerController";
+import { BehaviourType } from "./util/Enums";
 
 export class Game {
     private _world: World;
-    private _movingEntityController: MovingEntityController;
-    private _playerController: PlayerController;
+    private seperationSlider: HTMLInputElement;
+    private alignmentSlider: HTMLInputElement;
+    private cohesionSlider: HTMLInputElement;
     private _mouseDown: boolean;
 
     constructor() {
-        this._movingEntityController = new MovingEntityController();
-        this._playerController = new PlayerController();
         this._world = World.Instance;
+        this._world.populate();
         this._world.canvas.addEventListener('mousedown', this.mouseDownEvent, false);
         this._world.canvas.addEventListener('mousemove', this.moveEvent, false);
         this._world.canvas.addEventListener('mouseup', this.mouseUpEvent, false);
         this._mouseDown = false;
+
+        // this.alignmentSlider = <HTMLInputElement> document.getElementById("alignmentWeight");
+        // this.alignmentSlider.oninput = this.alignmentChanged;
+        // this.seperationSlider = <HTMLInputElement> document.getElementById("seperationWeight");
+        // this.seperationSlider.oninput = this.seperationChanged;
+        // this.cohesionSlider = <HTMLInputElement> document.getElementById("cohesionWeight");
+        // this.cohesionSlider.oninput = this.cohesionChanged;
     }
 
     public update(): void {
-        this._world.movingEntities.forEach(e => 
-            e.position = this._movingEntityController.update(e, this._world.movingEntities)
+        this._world.entities.forEach(e => 
+            e.update(this._world.entities)
         );
     }
 
     public render(): void {
         this._world.ctx.clearRect(0, 0, this._world.canvas.width, this._world.canvas.height);
-        this._world.movingEntities.forEach(e => e.render(this._world.ctx));
+        this._world.entities.forEach(e => e.render(this._world.ctx));
         this._world.target.render(this._world.ctx);
     }
 
@@ -46,4 +52,19 @@ export class Game {
         this._mouseDown = false; 
     }
     
+    // public seperationChanged = (e: Event): void => {
+    //     this._behaviourService.setWeight(BehaviourType.SEPERATION, +this.seperationSlider.value);
+    // }
+
+    // public alignmentChanged = (e: Event): void => {
+    //     this._behaviourService.setWeight(BehaviourType.ALIGNMENT, +this.alignmentSlider.value);
+    // }
+
+    // public cohesionChanged = (e: Event): void => {
+    //     this._behaviourService.setWeight(BehaviourType.COHESION, +this.cohesionSlider.value);
+    // }
+        
+    public toggleBehaviour = (e: Event): void => {
+                
+    }
 }

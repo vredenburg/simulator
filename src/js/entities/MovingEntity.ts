@@ -3,16 +3,21 @@ import { Entity } from "./Entity";
 import { Graphics } from "../util/Graphics";
 import { SteeringBehaviour } from "../behaviours/SteeringBehaviour";
 import { Deceleration } from "../util/Enums";
+import { BehaviourSet } from "../behaviours/BehaviourSet";
+import { wtf } from "../util/WhyCantJSDoThisProperly";
+import { World } from "../world/World";
 
 export class MovingEntity extends Entity {
+    private _world: World;
     public velocity: Vector2D;
     public heading: Vector2D;
-    public mass: number;
+    public perceptionRadius: number;
     public minSpeed: number;
     public maxSpeed: number;
     public maxTurnRate: number;
     public deceleration?: Deceleration;
     public panicDistance: number;
+    public behaviourSet: BehaviourSet;
 
     /**
      * @class MovingEntity
@@ -22,18 +27,41 @@ export class MovingEntity extends Entity {
      * @param {number} width - Entity width.
      * @param {number} height - Entity height.
      */
-    constructor(xPos: number, yPos: number, width: number = 5, height: number = 5) {
-        super(xPos, yPos, width, height);
-        this.mass = 120;
-        this.minSpeed = 1;
-        this.maxSpeed = 15;
-        this.deceleration = Deceleration.NORMAL;
+    constructor(xPos: number, yPos: number) {
+        super(xPos, yPos);
+        this._world = World.Instance;
         this.velocity = new Vector2D(Math.random()*10, Math.random()*10);
         this.heading = new Vector2D();
-        this.panicDistance = 100*100;
+        this.perceptionRadius = 55.0 * 55.0;
+        this.minSpeed = 20.0;
+        this.maxSpeed = 50.0;
+        this.deceleration = Deceleration.NORMAL;
+        this.panicDistance = 100.0 *100.0;
+        this.behaviourSet = new BehaviourSet();
     }
+
     /**
-     * 
+     * @method - Updates the entity object.
+     * @param {MovingEntity[]}otherEntities 
+     */
+    public update(otherEntities: MovingEntity[]): void {
+
+        let steeringForce: Vector2D = this.behaviourSet.act(this, otherEntities);
+        // console.log(steeringForce);
+        let acceleration: Vector2D = steeringForce.divide(this.mass);
+
+        this.velocity
+            .add(acceleration)
+            .normalise();
+
+        this.position.add(this.velocity);
+        this.heading = this.velocity.clone().normalise();
+
+        this.wrapAround();
+    }
+
+    /**
+     * @method - Renders the entity.
      * @param {CanvasRenderingContext2D} ctx 
      */
     public render(ctx: CanvasRenderingContext2D): void {
@@ -43,13 +71,25 @@ export class MovingEntity extends Entity {
     }
 
     /**
-     * 
+     * @method - Draws the perception radius of the entity.
      * @param {CanvasRenderingContext2D} ctx 
      */
     public showPerception(ctx: CanvasRenderingContext2D): void {
         Graphics.drawPerceptionRadius(ctx, this.position.x,  this.position.y, this.perceptionRadius);
     }
 
+    /**
+     * @method - Wraps around the entity to the other side of the map if the canvas borders are exceeded.
+     */
+    public wrapAround(): void {
+        // a custom modulo function is used here because apparantly JS' implementation of % can't deal with negative numbers
+        this.position =  new Vector2D(wtf.mod(this.position.x,  this._world.canvas.width), wtf.mod(this.position.y, this._world.canvas.height));
+    }
+
+    /**
+     * @method - Returns a copy of the entity.
+     * @returns {MovingEntity}
+     */
     public clone(): MovingEntity {
         let target: MovingEntity = new MovingEntity(0,0);
         Object.assign(target, this);

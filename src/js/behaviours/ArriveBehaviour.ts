@@ -4,6 +4,13 @@ import { MovingEntity } from "../entities/MovingEntity";
 
 export class ArriveBehaviour extends TargetedBehaviour {
 
+    /**
+     * Calculates the steering force for the given MovingEntity
+     * 
+     * @param {MovingEntity} movingEntity 
+     * @param {MovingEntity} target 
+     * @returns {Vector2D} Steering force.
+     */
     public act(movingEntity: MovingEntity, target: MovingEntity): Vector2D {
         let toTarget: Vector2D = target.position
             .clone()

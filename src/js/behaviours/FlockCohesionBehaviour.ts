@@ -31,7 +31,7 @@ export class FlockCohesionBehaviour extends SteeringBehaviour {
                 .sub(other.position)
                 .lengthSquared();
             
-            if(thisEntity.position != other.position && d < thisEntity.perceptionRadius) {
+            if( d < thisEntity.perceptionRadius) {
                 avg.add(other.position);
                 this.total++;
             }
@@ -48,7 +48,7 @@ export class FlockCohesionBehaviour extends SteeringBehaviour {
         let avg: Vector2D = new Vector2D(0,0);
         avg.add(this.cohesion(thisEntity, otherEntities, avg)); 
         this.total = 0;  
-
+        
         return avg.multiply(this.weight);
     }
 }

@@ -5,6 +5,13 @@ import { MovingEntity } from "../entities/MovingEntity";
 
 export class PursuitBehaviour extends SeekBehaviour {
 
+    /**
+     * Calculates the steering force for the given MovingEntity
+     * 
+     * @param {MovingEntity} movingEntity 
+     * @param {MovingEntity} target 
+     * @returns {Vector2D} Steering force.
+     */
     public act(movingEntity: MovingEntity, target: MovingEntity): Vector2D {
         let targetPrediction: MovingEntity = target.clone();
 
