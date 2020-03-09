@@ -62,7 +62,6 @@ export class BehaviourSet {
      */
     public setWeight(behaviour: BehaviourType, weight: number) {
         this.behaviours[behaviour].weight = weight/100.0;
-        console.log(this.behaviours[behaviour].weight);
     }
 
     /**
@@ -85,7 +84,7 @@ export class BehaviourSet {
             }
         }
 
-        return steeringForce;
+        return steeringForce.capSpeed(entity.minSpeed, entity.maxSpeed);
     }
 }
 

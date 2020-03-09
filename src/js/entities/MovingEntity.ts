@@ -32,11 +32,11 @@ export class MovingEntity extends Entity {
         this._world = World.Instance;
         this.velocity = new Vector2D(Math.random()*10, Math.random()*10);
         this.heading = new Vector2D();
-        this.perceptionRadius = 35 * 35;
-        this.minSpeed = 1;
-        this.maxSpeed = 50;
+        this.perceptionRadius = 55.0 * 55.0;
+        this.minSpeed = 20.0;
+        this.maxSpeed = 50.0;
         this.deceleration = Deceleration.NORMAL;
-        this.panicDistance = 100*100;
+        this.panicDistance = 100.0 *100.0;
         this.behaviourSet = new BehaviourSet();
     }
 
