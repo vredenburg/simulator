@@ -31,7 +31,7 @@ export class FlockAlignmentBehaviour extends SteeringBehaviour {
                 .sub(other.position)
                 .lengthSquared();
             
-            if(thisEntity.position.isNot(other.position) && d < thisEntity.perceptionRadius) {
+            if(d < thisEntity.perceptionRadius) {
                 avg.add(other.velocity);
                 this.total++;
             }

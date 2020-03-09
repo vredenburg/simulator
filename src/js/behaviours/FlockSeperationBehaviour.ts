@@ -31,7 +31,7 @@ export class FlockSeperationBehaviour extends SteeringBehaviour {
                 .sub(other.position)
                 .lengthSquared();
             
-            if(thisEntity.position.isNot(other.position) && d < thisEntity.perceptionRadius && d < thisEntity.presence) {
+            if( d < thisEntity.perceptionRadius && d < thisEntity.presence) {
                 let diff: Vector2D = thisEntity.position
                     .clone()
                     .sub(other.position)

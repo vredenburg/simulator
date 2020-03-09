@@ -1,7 +1,7 @@
 import { Controller } from "./Controller"
 import { Entity, MovingEntity } from "../entities";
 import { World } from "../world/World";
-import { BehaviourService, SeekBehaviour } from "../behaviours";
+import { SeekBehaviour } from "../behaviours";
 import { Vector2D } from "../util/Vector2D"
 import { wtf } from "../util/WhyCantJSDoThisProperly";
 import { BehaviourType } from "../util/Enums";

@@ -3,3 +3,4 @@ export * from "./EntityFactory";
 export * from "./MovingEntity";
 export * from "./PlayerEntity";
 export * from "./StaticEntity";
+export * from "./Swarm";

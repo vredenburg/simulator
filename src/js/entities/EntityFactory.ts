@@ -1,19 +1,57 @@
-import {Entity, MovingEntity, PlayerEntity, StaticEntity} from "./";
-import { wtf } from "../util/WhyCantJSDoThisProperly";
+import { MovingEntity, PlayerEntity, StaticEntity} from "./";
+import { Swarm } from "./Swarm";
+import { BehaviourType } from "../util/Enums";
 
-export class EntityFactory {
+export abstract class EntityFactory {
 
-    public getNewMovingEntities(amount: number, worldWidth: number, worldHeight: number): MovingEntity[] {
-        let entities: MovingEntity[];
+    /**
+     * Creates a new Swarm object.
+     * 
+     * @param {number} xSpawn Spawn location on the x-axis.
+     * @param {number} ySpawn Spawn location on the y-axis.
+     */
+    public static getSwarmEntity(xSpawn: number, ySpawn: number): Swarm {
+        let swarm = new Swarm(xSpawn, ySpawn, 30);
 
-        for(let i = 0; i < amount; i++) {
-            entities.push(new MovingEntity(wtf.random(worldWidth),wtf.random(worldHeight)));
-        }
-        return entities;
+        swarm.entities.forEach(e => {
+            e.behaviourSet.add(BehaviourType.FLOCK);
+        });
+
+        return swarm;
     }
 
-    public addPlayerEntity(): void {
-        // this.movingEntities.push(new PlayerEntity(300,300));
-        return
+    /**
+     * Creates a new MovingEntity object.
+     * 
+     * @param {number} xSpawn Spawn location on the x-axis.
+     * @param {number} ySpawn Spawn location on the y-axis.
+     * @description Temporary testing method.
+     */
+    public static getMovingEntity(xSpawn: number, ySpawn: number): MovingEntity  {
+        let movingEntity: MovingEntity = new MovingEntity(xSpawn, ySpawn);
+
+        movingEntity.behaviourSet.add(BehaviourType.PURSUIT);
+       
+        return movingEntity;
+    }
+
+    /**
+     * Creates a new MovingEntity object.
+     * 
+     * @param {number} xSpawn Spawn location on the x-axis.
+     * @param {number} ySpawn Spawn location on the y-axis.
+     * @param {number} width StaticEntity width.
+     * @param {number} heigth StaticEntity height.
+     * @description Temporary testing method.
+     */
+    public static getStaticEntity(xSpawn: number, ySpawn: number, width: number, height: number): StaticEntity {
+        return new StaticEntity(xSpawn, ySpawn, width, height);
+    }
+
+    /**
+     * @todo not yet implemented
+     */
+    public static getPlayerEntity(): PlayerEntity {
+        return;
     }
 }

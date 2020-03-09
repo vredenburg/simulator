@@ -68,13 +68,26 @@ export class Vector2D {
         return this;
     }
 
+    public capSPeed(min: number, max: number): Vector2D {
+        let distance: number = this.length();
+        if(distance > max) {
+            this.normalise(distance);
+            this.multiply(max);
+        }
+        if(distance <= min) {
+            this.normalise(distance);
+            this.multiply(min);
+        }
+        return this;
+    }
+
     public truncate(min: number, max: number): Vector2D {
         let distance: number = this.length();
         if(distance > max) {
             this.normalise(distance);
             this.multiply(max);
         }
-        if(distance < min) {
+        if(distance <= min) {
             this.normalise(distance);
             this.multiply(min);
         }
