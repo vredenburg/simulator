@@ -7,11 +7,21 @@ html, body {
     padding: 0px;
 }
 
-#canvas-container {
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+.canvas-container {
+    width: auto;
     margin: 0 auto;
     -webkit-tap-highlight-color: transparent;
 }
 
-form {
-    margin: 0 auto;
+
+.control-panel {
+    height: 100%;
+    padding: 3px;
+    border-color: dimgrey;
+    border-style: solid;
 }
