@@ -1,5 +1,5 @@
-import { Vector2D } from "../util/Vector2D";
-import { MovingEntity } from "../entities/MovingEntity"
+import { Vector2D } from "../../util/Vector2D";
+import { MovingEntity } from "../../entities/MovingEntity"
 
 export abstract class SteeringBehaviour {
     public weight: number = 1;

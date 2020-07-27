@@ -1,5 +1,5 @@
-import { Vector2D } from "../util/Vector2D";
-import { MovingEntity } from "../entities/MovingEntity";
+import { Vector2D } from "../../util/Vector2D";
+import { MovingEntity } from "../../entities/MovingEntity";
 import { TargetedBehaviour } from "./TargetedBehaviour";
 
 export class FleeBehaviour extends TargetedBehaviour {

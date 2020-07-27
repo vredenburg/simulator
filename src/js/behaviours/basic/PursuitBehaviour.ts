@@ -1,7 +1,6 @@
-import { SteeringBehaviour } from "./SteeringBehaviour";
 import { SeekBehaviour } from "./SeekBehaviour";
-import { Vector2D } from "../util/Vector2D";
-import { MovingEntity } from "../entities/MovingEntity";
+import { Vector2D } from "../../util/Vector2D";
+import { MovingEntity } from "../../entities/MovingEntity";
 
 export class PursuitBehaviour extends SeekBehaviour {
 

@@ -1,4 +1,4 @@
-import { SteeringBehaviour } from "./SteeringBehaviour";
+import { SteeringBehaviour } from "./basic/SteeringBehaviour";
 import { Vector2D } from "../util/Vector2D";
 import { MovingEntity } from "../entities/MovingEntity";
 import { BehaviourType } from "../util/Enums";
@@ -6,7 +6,7 @@ import { PursuitBehaviour, FleeBehaviour, ArriveBehaviour,
         FlockAlignmentBehaviour, FlockCohesionBehaviour, 
         FlockSeperationBehaviour
     } from "./";
-import { TargetedBehaviour } from "./TargetedBehaviour";
+import { TargetedBehaviour } from "./basic/TargetedBehaviour";
 import { World } from "../world/World";
 
 export class BehaviourSet {

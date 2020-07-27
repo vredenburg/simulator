@@ -1,6 +1,6 @@
 import { SteeringBehaviour } from "./SteeringBehaviour";
-import { Vector2D } from "../util/Vector2D";
-import { MovingEntity } from "../entities/MovingEntity";
+import { Vector2D } from "../../util/Vector2D";
+import { MovingEntity } from "../../entities/MovingEntity";
 
 // deprecated
 export class FlockBehaviour extends SteeringBehaviour {

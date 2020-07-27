@@ -1,9 +1,12 @@
-export * from "./ArriveBehaviour";
-export * from "./FleeBehaviour";
-export * from "./FlockAlignmentBehaviour";
-export * from "./FlockBehaviour";
-export * from "./FlockCohesionBehaviour";
-export * from "./FlockSeperationBehaviour";
-export * from "./SeekBehaviour";
-export * from "./SteeringBehaviour";
-export * from "./PursuitBehaviour";
+import { BehaviourSet } from "./BehaviourSet";
+
+export * from "./basic/ArriveBehaviour";
+export * from "./basic/FleeBehaviour";
+export * from "./basic/FlockAlignmentBehaviour";
+export * from "./basic/FlockBehaviour";
+export * from "./basic/FlockCohesionBehaviour";
+export * from "./basic/FlockSeperationBehaviour";
+export * from "./basic/SeekBehaviour";
+export * from "./basic/SteeringBehaviour";
+export * from "./basic/PursuitBehaviour";
+export * from "./BehaviourSet";
