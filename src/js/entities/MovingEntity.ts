@@ -1,7 +1,6 @@
 import { Vector2D } from "../util/Vector2D";
 import { Entity } from "./Entity";
 import { Graphics } from "../util/Graphics";
-import { SteeringBehaviour } from "../behaviours/SteeringBehaviour";
 import { Deceleration } from "../util/Enums";
 import { BehaviourSet } from "../behaviours/BehaviourSet";
 import { wtf } from "../util/WhyCantJSDoThisProperly";
