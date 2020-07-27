@@ -6,12 +6,4 @@ export abstract class GraphNode {
     }
 
     public abstract render(ctx: CanvasRenderingContext2D): void;
-
-    // const Inde(): number  {
-    //     return this.index;
-    // }
-
-    // public setIndex(newIndex: number): void {
-    //     this.index = newIndex;
-    // }
 }

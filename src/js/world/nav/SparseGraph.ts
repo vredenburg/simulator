@@ -2,7 +2,6 @@ import { GraphNode } from "./GraphNode";
 import { GraphEdge } from "./GraphEdge";
 import { Graphics } from "../../util/Graphics";
 import { NavGraphNode } from "./NavGraphNode";
-import { Vector2D } from "../../util/Vector2D";
 
 export class SparseGraph {
 
@@ -146,5 +145,4 @@ export class SparseGraph {
             Graphics.drawLine(ctx, fromPos.x, fromPos.y, toPos.x, toPos.y);
         })
     }
-    
 }

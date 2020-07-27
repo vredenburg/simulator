@@ -68,12 +68,6 @@ export class World {
         let yNodes: number = this.sparseGraph.getYNodeCount();
         let xIncrement: number = this.canvas.width / xNodes;
         let yIncrement: number = this.canvas.height / yNodes;
-        
-
-        console.log(this.staticEntities[0].position.lengthSquared());
-        console.log(xNodes);
-        console.log(yNodes);
-        
 
         for(let y = 0; y < yNodes; y++) {
             for(let x = 0; x < xNodes; x++) {
@@ -114,7 +108,6 @@ export class World {
 
         let toRight: number;
         let toBelow: number;
-        
  
         for(let i = 0; i < total; i++) {
             if(nodes[i].index >= 0) {
