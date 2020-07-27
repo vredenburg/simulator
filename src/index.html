@@ -8,35 +8,28 @@
 <!-- <link rel="stylesheet" type="text/css" href="css/main.css"> -->
 
 <body>
-	<div id="canvas-container">
-		<canvas id="canvas"></canvas>
-	</div>
-	<form>
-		<div class="form-group">
-		  <label for="formControlRange">Seperation weight</label>
-		  <input type="range" class="form-control-range" id="seperationWeight" min="1" max ="200" value="50">
-		  <label for="formControlRange">Alignment weight</label>
-		  <input type="range" class="form-control-range" id="alignmentWeight" min="1" max ="200" value="50">
-		  <label for="formControlRange">Cohesion weight</label>
-		  <input type="range" class="form-control-range" id="cohesionWeight" min="1" max ="200" value="50">
+	<div class="container">
+		<div id="canvas-container">
+			<canvas id="canvas"></canvas>
 		</div>
-		<div class="form-group">
-			<input type="checkbox" id="arrive" name="arrive" value="arrive">
-			<label for="arrive">Arrive</label>
-			<input type="checkbox" id="pursuit" name="pursuit" value="pursuit">
-			<label for="seek">Seek</label>
-			<input type="checkbox" id="flee" name="flee" value="flee">
-			<label for="flee">Flee</label>
-
-			<input type="checkbox" id="alignment" name="alignment" value="alignment">
-			<label for="alignmen">Alignment</label>
-			<input type="checkbox" id="cohesion" name="cohesion" value="cohesion">
-			<label for="cohesion">Cohesion</label>
-			<input type="checkbox" id="seperation" name="seperation" value="seperation">
-			<label for="seperation">Seperation</label>
+		<div class="control-panel">
+			<div>
+				<h1>hoi</h1>
+			</div>
+			<form>
+				<div class="form-group">
+					<label for="formControlRange">Seperation weight</label>
+					<input type="range" class="form-control-range" id="seperationWeight" min="1" max ="200" value="50"><br/>
+					<label for="formControlRange">Alignment weight</label>
+					<input type="range" class="form-control-range" id="alignmentWeight" min="1" max ="200" value="50"><br/>
+					<label for="formControlRange">Cohesion weight</label>
+					<input type="range" class="form-control-range" id="cohesionWeight" min="1" max ="200" value="50"><br/>
+				</div>	
+			</form>
 		</div>
 		
-	  </form>
+		
+	</div>
 </body>
 
 </html>

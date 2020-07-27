@@ -32,7 +32,7 @@ export class MovingEntity extends Entity {
         this._world = World.Instance;
         this.velocity = new Vector2D(Math.random()*10, Math.random()*10);
         this.heading = new Vector2D();
-        this.perceptionRadius = 55.0 * 55.0;
+        this.perceptionRadius = 100.0 * 100.0;
         this.minSpeed = 20.0;
         this.maxSpeed = 50.0;
         this.deceleration = Deceleration.NORMAL;
@@ -47,7 +47,6 @@ export class MovingEntity extends Entity {
     public update(otherEntities: MovingEntity[]): void {
 
         let steeringForce: Vector2D = this.behaviourSet.act(this, otherEntities);
-        // console.log(steeringForce);
         let acceleration: Vector2D = steeringForce.divide(this.mass);
 
         this.velocity

@@ -47,6 +47,6 @@ export class FlockAlignmentBehaviour extends SteeringBehaviour {
         avg.add(this.align(thisEntity, otherEntities, avg));
         this.total = 0;
 
-        return avg.multiply(this.weight);
+        return avg.multiply(4).multiply(this.weight);
     }
 }

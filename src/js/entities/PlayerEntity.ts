@@ -9,6 +9,6 @@ export class PlayerEntity extends MovingEntity {
      */
     public render(ctx: CanvasRenderingContext2D): void {
         Graphics.drawCircle(ctx, this.position.x, this.position.y);
-        // this.showPerception(ctx);
+        this.showPerception(ctx);
     }
 }

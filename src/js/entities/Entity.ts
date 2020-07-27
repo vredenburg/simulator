@@ -9,7 +9,7 @@ export abstract class Entity {
     constructor(xPos: number, yPos: number) {
         this.position = new Vector2D(xPos, yPos);
         this.scale = 1.0;
-        this.mass = 120.0;
+        this.mass = 1000.0;
         this.presence = 15.0 * 15.0;
     }
 

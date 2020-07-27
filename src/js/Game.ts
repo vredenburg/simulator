@@ -8,6 +8,7 @@ export class Game {
     private alignmentSlider: HTMLInputElement;
     private cohesionSlider: HTMLInputElement;
     private _mouseDown: boolean;
+    private _showNavGraph: boolean;
 
     constructor() {
         this._world = World.Instance;
@@ -16,6 +17,7 @@ export class Game {
         this._world.canvas.addEventListener('mousemove', this.moveEvent, false);
         this._world.canvas.addEventListener('mouseup', this.mouseUpEvent, false);
         this._mouseDown = false;
+        this._showNavGraph = true;
 
         // this.alignmentSlider = <HTMLInputElement> document.getElementById("alignmentWeight");
         // this.alignmentSlider.oninput = this.alignmentChanged;
@@ -26,15 +28,20 @@ export class Game {
     }
 
     public update(): void {
-        this._world.entities.forEach(e => 
-            e.update(this._world.entities)
+        this._world.movingEntities.forEach(e => 
+            e.update(this._world.movingEntities)
         );
     }
 
     public render(): void {
         this._world.ctx.clearRect(0, 0, this._world.canvas.width, this._world.canvas.height);
-        this._world.entities.forEach(e => e.render(this._world.ctx));
+        this._world.movingEntities.forEach(e => e.render(this._world.ctx));
+        this._world.staticEntities.forEach(e => e.render(this._world.ctx));
         this._world.target.render(this._world.ctx);
+
+        if(this._showNavGraph){
+            this._world.sparseGraph.render(this._world.ctx);
+        }
     }
 
     public mouseDownEvent = (e: MouseEvent): void => {

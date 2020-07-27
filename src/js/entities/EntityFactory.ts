@@ -31,6 +31,7 @@ export abstract class EntityFactory {
         let movingEntity: MovingEntity = new MovingEntity(xSpawn, ySpawn);
 
         movingEntity.behaviourSet.add(BehaviourType.PURSUIT);
+        movingEntity.behaviourSet.add(BehaviourType.SEPERATION);
        
         return movingEntity;
     }
