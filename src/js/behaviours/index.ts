@@ -7,6 +7,6 @@ export * from "./basic/FlockBehaviour";
 export * from "./basic/FlockCohesionBehaviour";
 export * from "./basic/FlockSeperationBehaviour";
 export * from "./basic/SeekBehaviour";
-export * from "./basic/SteeringBehaviour";
+export * from "./SteeringBehaviour";
 export * from "./basic/PursuitBehaviour";
 export * from "./BehaviourSet";

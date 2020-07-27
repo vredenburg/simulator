@@ -1,4 +1,4 @@
-import { SteeringBehaviour } from "./basic/SteeringBehaviour";
+import { SteeringBehaviour } from "./SteeringBehaviour";
 import { Vector2D } from "../util/Vector2D";
 import { MovingEntity } from "../entities/MovingEntity";
 import { BehaviourType } from "../util/Enums";
